@@ -22,8 +22,8 @@
   <section class="action-container">
     <p class="outer-border-text">48px</p>
     <div class="overflow-box">
-      <div class="outer-box" style="border-radius:var(--outerBorder)">
-        <div class="inner-box" style="var(--innerBorder)">
+      <div class="outer-box">
+        <div class="inner-box">
           <p class="inner-border-text">48px</p>
         </div>
       </div>
@@ -123,14 +123,29 @@
     {} as Record<SliderKey, SliderElements>
   );
 
+  function clampValue(value: number, min: number, max: number): number {
+    return Math.min(Math.max(value, min), max);
+  }
+
   function updateStyles(changed: SliderKey) {
     let outer = parseInt(elements.outerBorder.range.value, 10);
     let padding = parseInt(elements.padding.range.value, 10);
     let inner = parseInt(elements.innerBorder.range.value, 10);
 
-    if (changed === "outerBorder") inner = outer - padding;
-    if (changed === "padding") outer = inner + padding;
-    if (changed === "innerBorder") outer = padding + inner;
+    const outerMin = parseInt(elements.outerBorder.range.min, 10);
+    const outerMax = parseInt(elements.outerBorder.range.max, 10);
+    const paddingMin = parseInt(elements.padding.range.min, 10);
+    const paddingMax = parseInt(elements.padding.range.max, 10);
+    const innerMin = parseInt(elements.innerBorder.range.min, 10);
+    const innerMax = parseInt(elements.innerBorder.range.max, 10);
+
+    outer = clampValue(outer, outerMin, outerMax);
+    padding = clampValue(padding, paddingMin, paddingMax);
+    inner = clampValue(inner, innerMin, innerMax);
+
+    if (changed === "outerBorder") inner = Math.max(outer - padding, 0);
+    if (changed === "padding") outer = Math.max(inner + padding, 0);
+    if (changed === "innerBorder") outer = Math.max(padding + inner, 0);
 
     elements.outerBorder.range.value = outer.toString();
     elements.outerBorder.text.value = outer.toString();
@@ -147,7 +162,10 @@
   sliders.forEach((key) => {
     elements[key]?.range.addEventListener("input", () => updateStyles(key));
     elements[key]?.text.addEventListener("input", () => {
-      elements[key].range.value = elements[key].text.value;
+      const value = parseInt(elements[key].text.value, 10);
+      const min = parseInt(elements[key].range.min, 10);
+      const max = parseInt(elements[key].range.max, 10);
+      elements[key].range.value = clampValue(value, min, max).toString();
       updateStyles(key);
     });
   });
@@ -164,6 +182,15 @@
 </script>
 
 <style>
+  :root {
+    --outerBorder: 48px;
+    --padding: 36px;
+    --innerBorder: 12px;
+    --zoom: 1;
+    --primary: #9cb914;
+    --secondary: #e3e4e8;
+  }
+
   main {
     width: 100%;
     height: 100%;
@@ -188,14 +215,14 @@
   input[type="range"] {
     background: linear-gradient(
       to right,
-      var(#9cb914) var(--outerBorder),
-      /* valor del input es final del color principal */ var(#e3e4e8) 0
+      var(--primary) calc(var(--outerBorder) / 100 * 100%),
+      var(--secondary) calc(var(--outerBorder) / 100 * 100%)
     );
   }
 
   input[type="range"]::before {
     width: var(--outerBorder);
-    background-color: var(#9cb914);
+    background-color: var(--primary);
 
     filter: blur(8px);
     opacity: 0.8;
@@ -251,7 +278,7 @@
     position: absolute;
     weight: 700;
     top: 0;
-    left: -32px;
+    left: -60px;
     z-index: 10;
   }
 
@@ -295,8 +322,8 @@
   .inner-border-text {
     font-weight: 700;
     position: absolute;
-    top: 16px;
-    left: 16px;
+    top: 22px;
+    left: 24px;
   }
 
   .inner-box::before {
