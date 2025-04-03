@@ -3,6 +3,15 @@
 ---
 
 <main id="container">
+  <div class="design-tool">
+    <img
+      src="/public/svgs/sparkles.svg"
+      width="16"
+      height="16"
+      alt="sparkles icon"
+    />
+    <p class="design-tool-text">Design tool</p>
+  </div>
   <hgroup>
     <h1>Perfect Your Layouts with Ease</h1>
     <p class="title-description">
@@ -11,9 +20,12 @@
     </p>
   </hgroup>
   <section class="action-container">
+    <p class="outer-border-text">48px</p>
     <div class="overflow-box">
       <div class="outer-box" style="border-radius:var(--outerBorder)">
-        <div class="inner-box" style="var(--innerBorder)"></div>
+        <div class="inner-box" style="var(--innerBorder)">
+          <p class="inner-border-text">48px</p>
+        </div>
       </div>
     </div>
     <div class="sliders">
@@ -127,13 +139,10 @@
   });
 
   checkboxInput?.addEventListener("change", (event) => {
-    const isChecked = event.target.checked;
-
-    // const outerBorderElement = document.querySelector("")
+    const isChecked = (event.target as HTMLInputElement).checked;
 
     if (isChecked) {
       document.documentElement.style.setProperty("--zoom", "1.5");
-      // outerBorder.style.transformOrigin = "top-left";
     } else {
       document.documentElement.style.setProperty("--zoom", "1");
     }
@@ -148,7 +157,6 @@
     flex-direction: column;
     align-items: center;
     gap: 36px;
-    justify-content: center;
     text-align: center;
   }
 
@@ -160,6 +168,45 @@
   }
 
   .range {
+    width: 150px;
+  }
+
+  .range::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    background-color: #dfd6f0;
+    border-radius: 4px 0 0 4px;
+    height: 28px;
+    cursor: grab;
+  }
+
+  .range::-ms-thumb {
+    -webkit-appearance: none;
+    width: 100px;
+    background: goldenrod;
+  }
+
+  .design-tool {
+    position: relative;
+    width: fit-content;
+  }
+
+  .design-tool {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    width: fit-content;
+    height: 36px;
+    margin: 100px auto 0;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(to bottom, #281736, #08011f) padding-box,
+      linear-gradient(to bottom, #dfd6f0, transparent) border-box;
+
+    padding: 8px 32px;
+  }
+
+  .range {
     width: 400px;
   }
 
@@ -167,22 +214,37 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
   }
 
   .action-container {
     display: flex;
     gap: 36px;
+    display: relative;
+    font-family: "Manrope";
   }
 
   .overflow-box {
     width: 250px;
     height: 250px;
     overflow: hidden;
+    z-index: 5;
+  }
+
+  .outer-border-text {
+    position: absolute;
+    weight: 700;
+    top: 0;
+    left: -32px;
+    z-index: 10;
   }
 
   .outer-box {
-    background: #272740;
+    background: linear-gradient(
+      to right,
+      rgba(248, 245, 253, 0.5),
+      rgba(223, 214, 240, 0.5)
+    );
     width: 250px;
     height: 250px;
     padding: var(--padding);
@@ -192,17 +254,53 @@
     transition: transform 0.2s ease-in-out;
   }
 
+  .outer-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    border-radius: var(--outerBorder);
+    border: 6px solid #dfd6f0;
+
+    clip-path: polygon(0 0, 50% 0, 0 50%);
+    pointer-events: none;
+  }
+
   .inner-box {
-    background: #181831;
+    width: 100%;
+    height: 100%;
+    background: #12022a;
+    border-radius: var(--innerBorder);
+    position: relative;
+  }
+
+  .inner-border-text {
+    font-weight: 700;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+
+  .inner-box::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
     width: 100%;
     height: 100%;
     border-radius: var(--innerBorder);
+    border: 6px solid #dfd6f0;
+
+    clip-path: polygon(0 0, 50% 0, 0 50%);
+    pointer-events: none;
   }
 
   .sliders {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
   }
 
   hgroup {
@@ -218,6 +316,10 @@
     line-height: 1.2;
     font-weight: bold;
     font-family: "Aeonik", sans-serif;
+  }
+
+  .design-tool-text {
+    color: #dfd6f0;
   }
 
   .title-description {
