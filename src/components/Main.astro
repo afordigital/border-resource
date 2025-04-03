@@ -256,14 +256,9 @@
   }
 
   .outer-box {
-    background: linear-gradient(
-      to right,
-      rgba(248, 245, 253, 0.5),
-      rgba(223, 214, 240, 0.5)
-    );
     width: 250px;
     height: 250px;
-    padding: var(--padding);
+    border: var(--padding) solid rgba(248, 245, 253, 0.5);
     border-radius: var(--outerBorder);
     transform: scale(var(--zoom));
     transform-origin: top left;
@@ -273,10 +268,10 @@
   .outer-box::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% - 6px);
-    height: calc(100% - 6px);
+    top: calc(var(--padding) * -1);
+    left: calc(var(--padding) * -1);
+    width: calc(100% - 6px + var(--padding) * 2);
+    height: calc(100% - 6px + var(--padding) * 2);
     border-radius: var(--outerBorder);
     border: 6px solid #dfd6f0;
 
@@ -287,7 +282,7 @@
   .inner-box {
     width: 100%;
     height: 100%;
-    background: #12022a;
+    background: transparent;
     border-radius: var(--innerBorder);
     position: relative;
   }
