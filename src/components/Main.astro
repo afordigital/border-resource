@@ -168,6 +168,19 @@
 		document.documentElement.style.setProperty("--outerBorder", `${outer}px`);
 		document.documentElement.style.setProperty("--padding", `${padding}px`);
 		document.documentElement.style.setProperty("--innerBorder", `${inner}px`);
+
+		// Calcular tamaño y posición del texto dinámicamente
+		const textSize = Math.max(outer / 15, 15); // Tamaño mínimo de 8px
+		const textPositionX = outer / 4; // Ajustar posición proporcional en X
+		const textPositionY = outer / 4; // Ajustar posición proporcional en Y
+
+		// Actualizar estilos del texto dinámicamente
+		const innerBorderText =
+			document.querySelector<HTMLElement>(".inner-border-text");
+		if (innerBorderText) {
+			innerBorderText.style.fontSize = `${textSize}px`;
+			innerBorderText.style.transform = `translate(${textPositionX}px, ${textPositionY}px)`;
+		}
 	}
 
 	sliders.forEach((key) => {
@@ -185,10 +198,26 @@
 		const isChecked = (event.target as HTMLInputElement).checked;
 
 		if (isChecked) {
-			document.documentElement.style.setProperty("--zoom", "2.1");
+			document.documentElement.style.setProperty("--zoom", "2.0");
 		} else {
 			document.documentElement.style.setProperty("--zoom", "1");
 		}
+
+		// Nueva funcionalidad para encoger solo el texto
+		const textElements =
+			document.querySelectorAll<HTMLElement>(".inner-border-text");
+
+		textElements.forEach((textElement) => {
+			if (isChecked) {
+				textElement.style.transform = "scale(0.5)";
+				textElement.style.top = "5px";
+				textElement.style.left = "5px";
+			} else {
+				textElement.style.transform = "scale(1)";
+				textElement.style.top = "25px";
+				textElement.style.left = "25px";
+			}
+		});
 	});
 </script>
 
@@ -320,8 +349,8 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: calc(100% - 6px);
-		height: calc(100% - 6px);
+		width: calc(100% + 15px);
+		height: calc(100% + 5px);
 		border-radius: var(--outerBorder);
 		border: 6px solid #dfd6f0;
 		clip-path: polygon(0 0, 50% 0, 0 50%);
@@ -338,10 +367,10 @@
 	}
 
 	.inner-border-text {
-		font-weight: 700;
+		font-weight: 600;
 		position: absolute;
-		top: 33px;
-		left: 30px;
+		top: 15px;
+		left: 15px;
 	}
 
 	.inner-box::before {
@@ -349,8 +378,8 @@
 		position: absolute;
 		top: -2px;
 		left: -2px;
-		width: 100%;
-		height: 100%;
+		width: calc(100% + 15px);
+		height: calc(100% + 5px);
 		border-radius: var(--innerBorder);
 		border: 6px solid #dfd6f0;
 		clip-path: polygon(0 0, 50% 0, 0 50%);
