@@ -3,452 +3,508 @@
 ---
 
 <main id="container">
-  <div class="design-tool">
-    <img
-      src="/public/svgs/sparkles.svg"
-      width="16"
-      height="16"
-      alt="sparkles icon"
-    />
-    <p class="design-tool-text">Design tool</p>
-  </div>
-  <hgroup>
-    <h1>Perfect Your Layouts with Ease</h1>
-    <p class="title-description">
-      Discover how padding and border-radius interact in real time with this
-      dynamic, hands-on tool.
-    </p>
-  </hgroup>
-  <section class="action-container">
-    <p class="outer-border-text">48px</p>
-    <div class="overflow-box">
-      <div class="outer-box">
-        <div class="inner-box">
-          <p class="inner-border-text">48px</p>
-        </div>
-      </div>
-    </div>
-    <div class="sliders">
-      <label class="custom-label inputs-wrapper">
-        <div class="checkbox-wrapper-46">
-          <input type="checkbox" id="cbx-46" class="checkbox inp-cbx" />
-          <label for="cbx-46" class="checkbox cbx"
-            ><span>
-              <svg viewBox="0 0 12 10" height="10px" width="12px">
-                <polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg
-              ></span
-            ><span>Zoom In</span>
-          </label>
-        </div>
-      </label>
-      <label class="custom-label">
-        <span> Outer border </span>
-        <div class="inputs-wrapper">
-          <div class="wrapper-range">
-            <input
-              class="range outerBorder"
-              type="range"
-              min="0"
-              max="100"
-              value="48"
-            />
-          </div>
-          <input
-            type="number"
-            id="outerBorderText"
-            min="0"
-            max="100"
-            value="48"
-          />
-        </div>
-      </label>
-      <label class="custom-label">
-        <span> Padding </span>
-        <div class="inputs-wrapper">
-          <div class="wrapper-range">
-            <input
-              class="range padding"
-              type="range"
-              min="0"
-              max="100"
-              value="36"
-            />
-          </div>
-          <input type="number" id="paddingText" min="0" max="100" value="36" />
-        </div>
-      </label>
-      <label class="custom-label">
-        <span> Inner Border </span>
-        <div class="inputs-wrapper">
-          <div class="wrapper-range">
-            <input
-              class="range innerBorder"
-              type="range"
-              min="0"
-              max="100"
-              value="12"
-            />
-          </div>
-          <input
-            type="number"
-            id="innerBorderText"
-            min="0"
-            max="100"
-            value="12"
-          />
-        </div>
-      </label>
-    </div>
-  </section>
+	<div class="design-tool">
+		<img
+			src="/public/svgs/sparkles.svg"
+			width="16"
+			height="16"
+			alt="sparkles icon"
+		/>
+		<p class="design-tool-text">Design tool</p>
+	</div>
+	<hgroup>
+		<h1>Perfect Your Layouts with Ease</h1>
+		<p class="title-description">
+			Discover how padding and border-radius interact in real time with this
+			dynamic, hands-on tool.
+		</p>
+	</hgroup>
+	<section class="action-container">
+		<div class="overflow-box">
+			<p class="outer-border-text">48px</p>
+			<div class="container-outer-box">
+				<div class="outer-box">
+					<div class="inner-box">
+						<p class="inner-border-text">48px</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="sliders">
+			<label class="custom-label inputs-wrapper">
+				<div class="checkbox-wrapper-46">
+					<input type="checkbox" id="cbx-46" class="checkbox inp-cbx" />
+					<label for="cbx-46" class="checkbox cbx"
+						><span>
+							<svg viewBox="0 0 12 10" height="10px" width="12px">
+								<polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg
+							></span
+						><span>Zoom In</span>
+					</label>
+				</div>
+			</label>
+			<label class="custom-label">
+				<span> Outer border </span>
+				<div class="inputs-wrapper">
+					<div class="wrapper-range">
+						<input
+							class="range outerBorder customInputRange"
+							type="range"
+							min="0"
+							max="100"
+							value="48"
+						/>
+					</div>
+					<input
+						type="number"
+						class="numberText"
+						id="outerBorderText"
+						min="0"
+						max="100"
+						value="48"
+					/>
+				</div>
+			</label>
+			<label class="custom-label">
+				<span> Padding </span>
+				<div class="inputs-wrapper">
+					<div class="wrapper-range">
+						<input
+							class="range padding customInputRange"
+							type="range"
+							min="0"
+							max="50"
+							value="26"
+						/>
+					</div>
+					<input
+						type="number"
+						class="numberText"
+						id="paddingText"
+						min="0"
+						max="100"
+						value="26"
+					/>
+				</div>
+			</label>
+			<label class="custom-label">
+				<span> Inner Border </span>
+				<div class="inputs-wrapper">
+					<div class="wrapper-range">
+						<input
+							class="range innerBorder customInputRange"
+							type="range"
+							min="0"
+							max="100"
+							value="12"
+						/>
+					</div>
+					<input
+						type="number"
+						class="numberText"
+						id="innerBorderText"
+						min="0"
+						max="100"
+						value="12"
+					/>
+				</div>
+			</label>
+		</div>
+	</section>
 </main>
 
 <script>
-  const sliders = ["outerBorder", "padding", "innerBorder"] as const;
-  const checkboxInput = document.querySelector(".checkbox");
+	const sliders = ["outerBorder", "padding", "innerBorder"] as const;
+	const checkboxInput = document.querySelector(".checkbox");
 
-  type SliderKey = (typeof sliders)[number];
+	type SliderKey = (typeof sliders)[number];
 
-  type SliderElements = {
-    range: HTMLInputElement;
-    text: HTMLInputElement;
-  };
+	type SliderElements = {
+		range: HTMLInputElement;
+		text: HTMLInputElement;
+	};
 
-  const elements: Record<SliderKey, SliderElements> = sliders.reduce(
-    (acc, key) => {
-      const range = document.querySelector<HTMLInputElement>(`.${key}`);
-      const text = document.querySelector<HTMLInputElement>(`#${key}Text`);
-      if (range && text) acc[key] = { range, text };
-      return acc;
-    },
-    {} as Record<SliderKey, SliderElements>
-  );
+	const elements: Record<SliderKey, SliderElements> = sliders.reduce(
+		(acc, key) => {
+			const range = document.querySelector<HTMLInputElement>(`.${key}`);
+			const text = document.querySelector<HTMLInputElement>(`#${key}Text`);
+			if (range && text) acc[key] = { range, text };
+			return acc;
+		},
+		{} as Record<SliderKey, SliderElements>
+	);
 
-  function clampValue(value: number, min: number, max: number): number {
-    return Math.min(Math.max(value, min), max);
-  }
+	function clampValue(value: number, min: number, max: number): number {
+		return Math.min(Math.max(value, min), max);
+	}
 
-  function updateStyles(changed: SliderKey) {
-    let outer = parseInt(elements.outerBorder.range.value, 10);
-    let padding = parseInt(elements.padding.range.value, 10);
-    let inner = parseInt(elements.innerBorder.range.value, 10);
+	function updateStyles(changed: SliderKey) {
+		let outer = parseInt(elements.outerBorder.range.value, 10);
+		let padding = parseInt(elements.padding.range.value, 10);
+		let inner = parseInt(elements.innerBorder.range.value, 10);
 
-    const outerMin = parseInt(elements.outerBorder.range.min, 10);
-    const outerMax = parseInt(elements.outerBorder.range.max, 10);
-    const paddingMin = parseInt(elements.padding.range.min, 10);
-    const paddingMax = parseInt(elements.padding.range.max, 10);
-    const innerMin = parseInt(elements.innerBorder.range.min, 10);
-    const innerMax = parseInt(elements.innerBorder.range.max, 10);
+		const outerMin = parseInt(elements.outerBorder.range.min, 10);
+		const outerMax = parseInt(elements.outerBorder.range.max, 10);
+		const paddingMin = parseInt(elements.padding.range.min, 10);
+		const paddingMax = parseInt(elements.padding.range.max, 10);
+		const innerMin = parseInt(elements.innerBorder.range.min, 10);
+		const innerMax = parseInt(elements.innerBorder.range.max, 10);
 
-    outer = clampValue(outer, outerMin, outerMax);
-    padding = clampValue(padding, paddingMin, paddingMax);
-    inner = clampValue(inner, innerMin, innerMax);
+		outer = clampValue(outer, outerMin, outerMax);
+		padding = clampValue(padding, paddingMin, paddingMax);
+		inner = clampValue(inner, innerMin, innerMax);
 
-    if (changed === "outerBorder") inner = Math.max(outer - padding, 0);
-    if (changed === "padding") outer = Math.max(inner + padding, 0);
-    if (changed === "innerBorder") outer = Math.max(padding + inner, 0);
+		if (changed === "outerBorder") inner = Math.max(outer - padding, 0);
+		if (changed === "padding") outer = Math.max(inner + padding, 0);
+		if (changed === "innerBorder") outer = Math.max(padding + inner, 0);
 
-    elements.outerBorder.range.value = outer.toString();
-    elements.outerBorder.text.value = outer.toString();
-    elements.padding.range.value = padding.toString();
-    elements.padding.text.value = padding.toString();
-    elements.innerBorder.range.value = inner.toString();
-    elements.innerBorder.text.value = inner.toString();
+		elements.outerBorder.range.value = outer.toString();
+		elements.outerBorder.text.value = outer.toString();
+		elements.padding.range.value = padding.toString();
+		elements.padding.text.value = padding.toString();
+		elements.innerBorder.range.value = inner.toString();
+		elements.innerBorder.text.value = inner.toString();
 
-    document.documentElement.style.setProperty("--outerBorder", `${outer}px`);
-    document.documentElement.style.setProperty("--padding", `${padding}px`);
-    document.documentElement.style.setProperty("--innerBorder", `${inner}px`);
-  }
+		document.documentElement.style.setProperty("--outerBorder", `${outer}px`);
+		document.documentElement.style.setProperty("--padding", `${padding}px`);
+		document.documentElement.style.setProperty("--innerBorder", `${inner}px`);
+	}
 
-  sliders.forEach((key) => {
-    elements[key]?.range.addEventListener("input", () => updateStyles(key));
-    elements[key]?.text.addEventListener("input", () => {
-      const value = parseInt(elements[key].text.value, 10);
-      const min = parseInt(elements[key].range.min, 10);
-      const max = parseInt(elements[key].range.max, 10);
-      elements[key].range.value = clampValue(value, min, max).toString();
-      updateStyles(key);
-    });
-  });
+	sliders.forEach((key) => {
+		elements[key]?.range.addEventListener("input", () => updateStyles(key));
+		elements[key]?.text.addEventListener("input", () => {
+			const value = parseInt(elements[key].text.value, 10);
+			const min = parseInt(elements[key].range.min, 10);
+			const max = parseInt(elements[key].range.max, 10);
+			elements[key].range.value = clampValue(value, min, max).toString();
+			updateStyles(key);
+		});
+	});
 
-  checkboxInput?.addEventListener("change", (event) => {
-    const isChecked = (event.target as HTMLInputElement).checked;
+	checkboxInput?.addEventListener("change", (event) => {
+		const isChecked = (event.target as HTMLInputElement).checked;
 
-    if (isChecked) {
-      document.documentElement.style.setProperty("--zoom", "1.5");
-    } else {
-      document.documentElement.style.setProperty("--zoom", "1");
-    }
-  });
+		if (isChecked) {
+			document.documentElement.style.setProperty("--zoom", "2.1");
+		} else {
+			document.documentElement.style.setProperty("--zoom", "1");
+		}
+	});
 </script>
 
 <style>
-  :root {
-    --outerBorder: 48px;
-    --padding: 36px;
-    --innerBorder: 12px;
-    --zoom: 1;
-    --primary: #9cb914;
-    --secondary: #e3e4e8;
-  }
+	/* Variables globales */
+	:root {
+		--outerBorder: 48px;
+		--padding: 36px;
+		--innerBorder: 12px;
+		--zoom: 1;
+		--primary: #9cb914;
+		--secondary: #e3e4e8;
+	}
 
-  main {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 36px;
-    text-align: center;
-  }
+	/* Estilos generales del contenedor principal */
+	main {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 36px;
+		text-align: center;
+	}
 
-  .custom-label {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 8px;
-  }
+	/* Estilos para la herramienta de diseño */
+	.design-tool {
+		position: relative;
+		width: fit-content;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		border-radius: 10px;
+		width: fit-content;
+		height: 36px;
+		margin: 100px auto 0;
+		border: 2px solid transparent;
+		background:
+			linear-gradient(to bottom, #281736, #08011f) padding-box,
+			linear-gradient(to bottom, #dfd6f0, transparent) border-box;
+		padding: 8px 32px;
+	}
 
-  .range {
-    width: 150px;
-  }
+	.design-tool-text {
+		color: #dfd6f0;
+	}
 
-  input[type="range"] {
-    background: linear-gradient(
-      to right,
-      var(--primary) calc(var(--outerBorder) / 100 * 100%),
-      var(--secondary) calc(var(--outerBorder) / 100 * 100%)
-    );
-  }
+	/* Estilos para el encabezado */
+	hgroup {
+		max-width: 800px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		align-items: center;
+	}
 
-  input[type="range"]::before {
-    width: var(--outerBorder);
-    background-color: var(--primary);
+	h1 {
+		font-size: 72px;
+		line-height: 1.2;
+		font-weight: bold;
+		font-family: "Aeonik", sans-serif;
+	}
 
-    filter: blur(8px);
-    opacity: 0.8;
-  }
+	.title-description {
+		color: #cfcfcf;
+		font-size: 18px;
+		max-width: 50ch;
+		line-height: 1.4;
+		font-family: "Manrope", sans-serif;
+	}
 
-  .design-tool {
-    position: relative;
-    width: fit-content;
-  }
+	/* Contenedor de acciones */
+	.action-container {
+		display: flex;
+		gap: 25px;
+		display: relative;
+		font-family: "Manrope";
+	}
 
-  .design-tool {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: 10px;
-    width: fit-content;
-    height: 36px;
-    margin: 100px auto 0;
-    border: 2px solid transparent;
-    background:
-      linear-gradient(to bottom, #281736, #08011f) padding-box,
-      linear-gradient(to bottom, #dfd6f0, transparent) border-box;
+	/* Caja externa y su contenido */
+	.overflow-box {
+		display: flex;
+		flex-direction: row;
+		align-items: baseline;
+		justify-content: flex-start;
+		gap: 0.5em;
+		padding-left: 20px;
+		position: relative;
+	}
 
-    padding: 8px 32px;
-  }
+	.outer-border-text {
+		position: absolute;
+		font-weight: 700;
+		top: -20px;
+		left: -20px;
+		z-index: 10;
+		padding: 2px 4px;
+		border-radius: 4px;
+	}
 
-  .range {
-    width: 400px;
-  }
+	.container-outer-box {
+		overflow: hidden;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
+	.outer-box {
+		background: linear-gradient(
+			to right,
+			rgba(248, 245, 253, 0.5),
+			rgba(223, 214, 240, 0.5)
+		);
+		width: 250px;
+		height: 250px;
+		padding: var(--padding);
+		border-radius: var(--outerBorder);
+		transform: scale(var(--zoom));
+		transform-origin: top left;
+		transition: transform 0.2s ease-in-out;
+	}
 
-  .inputs-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 4px;
-  }
+	.outer-box::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: calc(100% - 6px);
+		height: calc(100% - 6px);
+		border-radius: var(--outerBorder);
+		border: 6px solid #dfd6f0;
+		clip-path: polygon(0 0, 50% 0, 0 50%);
+		pointer-events: none;
+	}
 
-  .action-container {
-    display: flex;
-    gap: 36px;
-    display: relative;
-    font-family: "Manrope";
-  }
+	/* Caja interna */
+	.inner-box {
+		width: 100%;
+		height: 100%;
+		background: #12022a;
+		border-radius: var(--innerBorder);
+		position: relative;
+	}
 
-  .overflow-box {
-    width: 250px;
-    height: 250px;
-    overflow: hidden;
-    z-index: 5;
-  }
+	.inner-border-text {
+		font-weight: 700;
+		position: absolute;
+		top: 33px;
+		left: 30px;
+	}
 
-  .outer-border-text {
-    position: absolute;
-    weight: 700;
-    top: 0;
-    left: -60px;
-    z-index: 10;
-  }
+	.inner-box::before {
+		content: "";
+		position: absolute;
+		top: -2px;
+		left: -2px;
+		width: 100%;
+		height: 100%;
+		border-radius: var(--innerBorder);
+		border: 6px solid #dfd6f0;
+		clip-path: polygon(0 0, 50% 0, 0 50%);
+		pointer-events: none;
+	}
 
-  .outer-box {
-    background: linear-gradient(
-      to right,
-      rgba(248, 245, 253, 0.5),
-      rgba(223, 214, 240, 0.5)
-    );
-    width: 250px;
-    height: 250px;
-    padding: var(--padding);
-    border-radius: var(--outerBorder);
-    transform: scale(var(--zoom));
-    transform-origin: top left;
-    transition: transform 0.2s ease-in-out;
-  }
+	/* Controles deslizantes */
+	.sliders {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
 
-  .outer-box::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% - 6px);
-    height: calc(100% - 6px);
-    border-radius: var(--outerBorder);
-    border: 6px solid #dfd6f0;
+	.custom-label {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		gap: 8px;
+	}
 
-    clip-path: polygon(0 0, 50% 0, 0 50%);
-    pointer-events: none;
-  }
+	.inputs-wrapper {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+	}
 
-  .inner-box {
-    width: 100%;
-    height: 100%;
-    background: #12022a;
-    border-radius: var(--innerBorder);
-    position: relative;
-  }
+	.range {
+		width: 400px;
+	}
 
-  .inner-border-text {
-    font-weight: 700;
-    position: absolute;
-    top: 22px;
-    left: 24px;
-  }
+	/* Estilos personalizados para los controles deslizantes */
+	.customInputRange[type="range"] {
+		-webkit-appearance: none;
+		appearance: none;
+		cursor: pointer;
+		outline: none;
+		overflow: hidden;
+		border-radius: 16px;
+		background-color: rgb(255, 255, 255, 0.5);
+	}
 
-  .inner-box::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    width: 100%;
-    height: 100%;
-    border-radius: var(--innerBorder);
-    border: 6px solid #dfd6f0;
+	.customInputRange[type="range"]::-webkit-slider-runnable-track {
+		height: 30px;
+		border-radius: 15px;
+		padding: 0;
+	}
 
-    clip-path: polygon(0 0, 50% 0, 0 50%);
-    pointer-events: none;
-  }
+	.customInputRange[type="range"]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		height: 30px;
+		width: 30px;
+		background-color: rgb(255, 255, 255);
+		border-radius: 50%;
+		border: 2px solid #60008d;
+		box-shadow: -400px 0 0 390px #60008d;
+		transform: translateY(-0.5px);
+	}
 
-  .sliders {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+	/* Estilos para los inputs de texto */
+	.numberText {
+		all: unset;
+		font-size: 1.2em;
+		color: #dfd6f0;
+		text-align: center;
+		font-family: "Aeonik", sans-serif;
+		position: initial;
+		width: 60px;
+	}
 
-  hgroup {
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-  }
+	/* Estilos para el checkbox */
+	.checkbox-wrapper-46 input[type="checkbox"] {
+		display: none;
+		visibility: hidden;
+	}
 
-  h1 {
-    font-size: 72px;
-    line-height: 1.2;
-    font-weight: bold;
-    font-family: "Aeonik", sans-serif;
-  }
+	.checkbox-wrapper-46 .cbx {
+		margin: auto;
+		-webkit-user-select: none;
+		user-select: none;
+		cursor: pointer;
+	}
 
-  .design-tool-text {
-    color: #dfd6f0;
-  }
+	.checkbox-wrapper-46 .cbx span {
+		display: inline-block;
+		vertical-align: middle;
+		transform: translate3d(0, 0, 0);
+	}
 
-  .title-description {
-    color: #cfcfcf;
-    font-size: 18px;
-    max-width: 50ch;
-    line-height: 1.4;
-    font-family: "Manrope", sans-serif;
-  }
+	.checkbox-wrapper-46 .cbx span:first-child {
+		position: relative;
+		width: 18px;
+		height: 18px;
+		border-radius: 3px;
+		transform: scale(1);
+		vertical-align: middle;
+		border: 1px solid #9098a9;
+		transition: all 0.2s ease;
+	}
 
-  /* From Uiverse.io by vishnupprajapat */
-  .checkbox-wrapper-46 input[type="checkbox"] {
-    display: none;
-    visibility: hidden;
-  }
+	.checkbox-wrapper-46 .cbx span:first-child svg {
+		position: absolute;
+		top: 3px;
+		left: 2px;
+		fill: none;
+		stroke: #ffffff;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-dasharray: 16px;
+		stroke-dashoffset: 16px;
+		transition: all 0.3s ease;
+		transition-delay: 0.1s;
+		transform: translate3d(0, 0, 0);
+	}
 
-  .checkbox-wrapper-46 .cbx {
-    margin: auto;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: pointer;
-  }
-  .checkbox-wrapper-46 .cbx span {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translate3d(0, 0, 0);
-  }
-  .checkbox-wrapper-46 .cbx span:first-child {
-    position: relative;
-    width: 18px;
-    height: 18px;
-    border-radius: 3px;
-    transform: scale(1);
-    vertical-align: middle;
-    border: 1px solid #9098a9;
-    transition: all 0.2s ease;
-  }
-  .checkbox-wrapper-46 .cbx span:first-child svg {
-    position: absolute;
-    top: 3px;
-    left: 2px;
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 16px;
-    stroke-dashoffset: 16px;
-    transition: all 0.3s ease;
-    transition-delay: 0.1s;
-    transform: translate3d(0, 0, 0);
-  }
-  .checkbox-wrapper-46 .cbx span:first-child:before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    background: #dfd6f0;
-    display: block;
-    transform: scale(0);
-    opacity: 1;
-    border-radius: 50%;
-  }
-  .checkbox-wrapper-46 .cbx span:last-child {
-    padding-left: 8px;
-  }
-  .checkbox-wrapper-46 .cbx:hover span:first-child {
-    border-color: #dfd6f0;
-  }
+	.checkbox-wrapper-46 .cbx span:first-child:before {
+		content: "";
+		width: 100%;
+		height: 100%;
+		background: #7b4dd1;
+		display: block;
+		transform: scale(0);
+		opacity: 1;
+		border-radius: 50%;
+	}
 
-  .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child {
-    background: #dfd6f0;
-    border-color: #dfd6f0;
-    animation: wave-46 0.4s ease;
-  }
-  .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child svg {
-    stroke-dashoffset: 0;
-  }
-  .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child:before {
-    transform: scale(3.5);
-    opacity: 0;
-    transition: all 0.6s ease;
-  }
+	.checkbox-wrapper-46 .cbx span:last-child {
+		padding-left: 8px;
+	}
 
-  @keyframes wave-46 {
-    50% {
-      transform: scale(0.9);
-    }
-  }
+	.checkbox-wrapper-46 .cbx:hover span:first-child {
+		border-color: #7b4dd1;
+	}
+
+	.checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child {
+		background: #7b4dd1;
+		border-color: rgb(84, 48, 150);
+		animation: wave-46 0.4s ease;
+	}
+
+	.checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child svg {
+		stroke-dashoffset: 0;
+	}
+
+	.checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child:before {
+		transform: scale(3.5);
+		opacity: 0;
+		transition: all 0.6s ease;
+	}
+
+	/* Animaciones */
+	@keyframes wave-46 {
+		50% {
+			transform: scale(0.9);
+		}
+	}
 </style>
