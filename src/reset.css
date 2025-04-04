@@ -3,7 +3,8 @@
  * Original file: /npm/modern-normalize@3.0.1/modern-normalize.css
  *
  * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
- */
+ **/
+
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 *,
 ::after,
@@ -91,4 +92,5 @@ progress {
 summary {
   display: list-item;
 }
-/*# sourceMappingURL=/sm/d2d8cd206fb9f42f071e97460f3ad9c875edb5e7a4b10f900a83cdf8401c53a9.map */
+
+/* #sourceMappingURL=/sm/d2d8cd206fb9f42f071e97460f3ad9c875edb5e7a4b10f900a83cdf8401c53a9.map */
