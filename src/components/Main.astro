@@ -297,12 +297,13 @@
 		justify-content: center;
 		width: 100%;
 		height: 100%;
+		margin: 0 10px;
 	}
 	.outer-box {
 		background: linear-gradient(
 			to right,
-			rgba(248, 245, 253, 0.5),
-			rgba(223, 214, 240, 0.5)
+			rgba(248, 245, 253, 0.25),
+			rgba(223, 214, 240, 0.25)
 		);
 		width: 250px;
 		height: 250px;
@@ -311,6 +312,7 @@
 		transform: scale(var(--zoom));
 		transform-origin: top left;
 		transition: transform 0.2s ease-in-out;
+		margin: 0 10px;
 	}
 
 	.outer-box::before {
@@ -388,7 +390,7 @@
 		outline: none;
 		overflow: hidden;
 		border-radius: 16px;
-		background-color: rgb(255, 255, 255, 0.5);
+		background-color: rgb(255, 255, 255, 0.35);
 	}
 
 	.customInputRange[type="range"]::-webkit-slider-runnable-track {
