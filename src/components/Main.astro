@@ -172,6 +172,52 @@
       document.documentElement.style.setProperty("--zoom", "1");
     }
   });
+
+  function updateTextPosition() {
+    const outerBorder = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--outerBorder"
+      ),
+      10
+    );
+    const innerBorder = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--innerBorder"
+      ),
+      10
+    );
+    const padding = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue("--padding"),
+      10
+    );
+
+    if (outerBorder >= 100 && innerBorder >= 40 && padding >= 70) {
+      document.documentElement.style.setProperty("--textTop", "50%");
+      document.documentElement.style.setProperty("--textLeft", "50%");
+      document.documentElement.style.setProperty("--textPadding", "0");
+      document.documentElement.style.setProperty(
+        "--textTransform",
+        "translate(-50%, -50%)"
+      );
+    } else {
+      const topValue = `${innerBorder / 10}px`;
+      document.documentElement.style.setProperty("--textTop", topValue);
+      document.documentElement.style.setProperty("--textLeft", topValue);
+      document.documentElement.style.setProperty("--textPadding", "20px");
+      document.documentElement.style.setProperty(
+        "--textTransform",
+        "translate(0, 0)"
+      );
+    }
+  }
+
+  // Llama a esta función cada vez que cambien los valores
+  updateTextPosition();
+
+  // Escucha los cambios en los controles deslizantes
+  document.querySelectorAll(".range").forEach((input) => {
+    input.addEventListener("input", updateTextPosition);
+  });
 </script>
 
 <style>
@@ -351,10 +397,24 @@
   }
 
   .inner-border-text {
-    font-weight: 700;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
     position: absolute;
-    top: 16px;
-    left: 16px;
+    top: var(
+      --textTop
+    ); /* Usa la variable dinámica para la posición vertical */
+    left: var(
+      --textLeft
+    ); /* Usa la variable dinámica para la posición horizontal */
+
+    margin-top: var(
+      --textPadding
+    ); /* Usa la variable dinámica para el padding */
+    margin-left: var(
+      --textPadding
+    ); /* Usa la variable dinámica para el padding */
+    transform: var(--textTransform); /* Ajusta el centrado */
   }
 
   .inner-box::before {
